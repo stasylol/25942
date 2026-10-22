@@ -34,17 +34,17 @@ int main(int argument_count, char *argument_values[])
 
     const char *target_file = argument_values[1];
 
-    // Этап 1: Проверка с повышенными привилегиями (setuid)
+   
     display_process_identity();
     check_file_access(target_file);
 
-    // Этап 2: Сброс эффективных прав до уровня реального пользователя
+  
     if (setuid(getuid()) < 0) {
         perror("Не удалось выполнить setuid");
         return EXIT_FAILURE;
     }
 
-    // Этап 3: Повторная проверка после сброса прав
+
     display_process_identity();
     check_file_access(target_file);
 
